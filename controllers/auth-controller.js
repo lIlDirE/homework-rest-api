@@ -94,7 +94,7 @@ const avatarUpdate = async (req, res) => {
   const newFilePath = path.join(destination, filename);
   await image.writeAsync(newFilePath);
 
-  const newAvatarUrl = `${req.protocol}://${req.get("host")}/public/avatars/${filename}`;
+  const newAvatarUrl = `${req.protocol}://${req.get("host")}/avatars/${filename}`;
   await User.findByIdAndUpdate(_id, { avatarURL: newAvatarUrl });
 
   res.json({
