@@ -4,7 +4,6 @@ const {
   isValidId,
   validateContactsBody,
   authenticate,
-  upload,
 } = require("../../middlewares");
 
 const { schemas } = require("../../models/contact");
@@ -21,7 +20,7 @@ router.use(authenticate);
 
 router.get("/", getAll);
 router.get("/:contactId", isValidId, getContactById);
-router.post("/", upload.single("avatar"), validateContactsBody(schemas.contactsAddSchema), addContact);
+router.post("/", validateContactsBody(schemas.contactsAddSchema), addContact);
 router.delete("/:contactId", isValidId, removeContact);
 router.put(
   "/:contactId",
