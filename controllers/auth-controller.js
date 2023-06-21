@@ -28,9 +28,11 @@ const register = async (req, res) => {
   });
 
   res.status(201).json({
-    email: newUser.email,
-    subscription: newUser.subscription,
-    avatarURL: modifiedUrl,
+	user:{
+		email: newUser.email,
+		subscription: newUser.subscription,
+		avatarURL: modifiedUrl,
+	}
   });
 };
 
@@ -94,8 +96,10 @@ const avatarUpdate = async (req, res) => {
   const newFilePath = path.join(destination, filename);
   await image.writeAsync(newFilePath);
 
-  const newAvatarUrl = `${req.protocol}://${req.get("host")}/avatars/${filename}`;
+ 
+  const newAvatarUrl =  path.join("avatars", filename);
   await User.findByIdAndUpdate(_id, { avatarURL: newAvatarUrl });
+  console.log(newAvatarUrl);
 
   res.json({
 	newAvatarUrl,
