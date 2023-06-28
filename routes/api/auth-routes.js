@@ -10,4 +10,6 @@ router.post("/login", validateContactsBody(schemas.userLoginSchema), authControl
 router.post("/logout", authenticate, authController.logout)
 router.get("/current", authenticate, authController.getCurrent);
 router.patch("/avatars", upload.single("avatar"), authenticate, authController.avatarUpdate)
+router.get("/verify/:verificationToken", authController.verify)
+router.post("/verify/", validateContactsBody(schemas.userEmailSchema), authController.resendEmail)
 module.exports = router;
