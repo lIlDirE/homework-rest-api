@@ -143,17 +143,15 @@ const resendEmail = async (req, res) => {
     throw HttpError(400, "Verification has already been passed");
   }
 
-  const verificationToken = nanoid();
-
   const verifyEmail = {
     to: email,
     subject: "Verify email",
-    html: `<a target="_blank" href="${BASE_URL}/users/verify/${verificationToken}">Click to verify email</a>`,
+    html: `<a target="_blank" href="${BASE_URL}/users/verify/${user.verificationToken}">Click to verify email</a>`,
   };
 
   await emailSender(verifyEmail);
 
-  res.status(200).json({ message: "Verification successful" });
+  res.status(200).json({ message: "Verification email sent" });
 };
 
 module.exports = {
