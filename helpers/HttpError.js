@@ -12,4 +12,4 @@ const messagesList = {
 	return error;
  };
  
- module.exports = HttpError;
+ module.exports = {HttpError};

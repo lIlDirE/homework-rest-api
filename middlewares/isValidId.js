@@ -2,7 +2,7 @@ const { isValidObjectId } = require("mongoose");
 
 const { HttpError } = require("../helpers");
 
-const isValidId = (req, res, next) => {
+const isValidId = async (req, res, next) => {
    const { contactId } = req.params;
    if (!isValidObjectId(contactId)) {
 	next(HttpError(404, `${contactId} invalid id format`));
@@ -10,4 +10,4 @@ const isValidId = (req, res, next) => {
    next();
 };
 
-module.exports = isValidId;
+module.exports = {isValidId};
